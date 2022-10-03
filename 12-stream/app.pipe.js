@@ -1,5 +1,5 @@
 const fs = require('fs');
-//압축할수있는 모듈
+//압축할수있는 스트림 모듈
 const zlib = require('zlib');
 
 const readStream = fs.createReadStream('./file.txt');
