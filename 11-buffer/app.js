@@ -3,7 +3,7 @@ const buf = Buffer.from('Hi');
 //Hi라는 스트링을 메모리에 올릴때 어떤식으로 저장이 되는지 확인해보자
 
 const bufTest = Buffer.from('Hi', 'utf8'); // 위 코드와 동일
-//엄밀히 말하면 Buffer에서 별도로 인코딩을 지정하지 않으면 UTF-8 인코딩 방식을 쓴다.
+//엄밀히 말하면 Bufferf를 만들때 별도로 인코딩을 지정하지 않으면 UTF-8 인코딩 방식을 쓴다.
 //즉 위 코드와 동일하게 버퍼를 만든다
 
 console.log(buf);
