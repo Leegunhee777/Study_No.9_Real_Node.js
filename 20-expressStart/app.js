@@ -13,6 +13,14 @@ app.get('/sky/:id', (req, res, next) => {
   //res.sendStatus(400);
   res.setHeader('key', 124);
   res.setHeader('qwe', 'qweqwe');
-  res.status(201).send('created');
+
+  //res.send로 텍스트타입도 보낼수있고
+  // res.status(201).send('created');
+
+  //jons타입으로도 보낼수 있다.
+  res.status(200).json({ name: 'Gunhee' });
+
+  //status코드만 보낼수도있다.
+  // res.sendStatus(400);
 });
 app.listen(8080);
