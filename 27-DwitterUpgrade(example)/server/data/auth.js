@@ -14,7 +14,6 @@ export async function findByUsername(username) {
 }
 
 export async function findById(id) {
-  console.log(users.find(user => user.id === id));
   return users.find(user => user.id === id);
 }
 export async function createUser(user) {
