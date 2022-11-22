@@ -1,6 +1,7 @@
 export default class HttpClient {
-  constructor(baseURL) {
+  constructor(baseURL, authErrorEventBus) {
     this.baseURL = baseURL;
+    this.authErrorEventBus = authErrorEventBus;
   }
 
   async fetch(url, options) {
@@ -26,6 +27,12 @@ export default class HttpClient {
       const message =
         data && data.message ? data.message : 'Something went wrong!';
 
+      const error = new Error(message);
+      // 토큰만료라던가...auth와 관련된 에러라면!
+      if (res.status === 401) {
+        this.authErrorEventBus.notify(error);
+        return;
+      }
       throw new Error(message);
     }
     return data;
