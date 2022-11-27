@@ -7,6 +7,8 @@ import tweetsRouter from './router/tweets.js';
 import authRouter from './router/auth.js';
 import dotenv from 'dotenv';
 
+import { initSocket } from './connection/socket.js';
+
 dotenv.config();
 console.log(process.env);
 const app = express();
@@ -27,4 +29,8 @@ app.use((error, req, res, next) => {
   console.error(error);
   res.sendStatus(500);
 });
-app.listen(8080);
+//소켓 사용하기 전 원래 코드
+// app.listen(8080);
+
+const server = app.listen(8080);
+initSocket(server);
