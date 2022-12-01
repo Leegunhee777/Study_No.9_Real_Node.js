@@ -8,9 +8,10 @@ import authRouter from './router/auth.js';
 import dotenv from 'dotenv';
 
 import { initSocket } from './connection/socket.js';
+import { db } from './db/database.js';
 
 dotenv.config();
-console.log(process.env);
+// console.log(process.env);
 const app = express();
 
 app.use(express.json());
@@ -32,5 +33,12 @@ app.use((error, req, res, next) => {
 //소켓 사용하기 전 원래 코드
 // app.listen(8080);
 
+db.getConnection()
+  .then(connection => {
+    // console.log(connection);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 const server = app.listen(8080);
 initSocket(server);

@@ -51,6 +51,7 @@ function createJwtToken(id) {
 }
 
 export async function me(req, res, next) {
+  //isAuth 미들웨어에서 만들어준 userId를 이용하고있음
   const user = await userRepository.findById(req.userId);
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
