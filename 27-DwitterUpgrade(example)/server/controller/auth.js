@@ -59,7 +59,9 @@ export async function me(req, res, next) {
   console.log(req.authorization);
   //토큰과 함께 유저데이터를 내려준다.
   res.status(200).json({
-    token: req.get('Authorization').split(' ')[1],
+    //이렇게 req Header의 Auth정보를 뽑을수도있다.
+    // token: req.get('Authorization').split(' ')[1],
+    token: req.token,
     username: user.username,
   });
 }

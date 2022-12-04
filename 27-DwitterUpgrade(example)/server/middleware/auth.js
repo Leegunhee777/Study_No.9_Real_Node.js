@@ -23,9 +23,10 @@ export const isAuth = async (req, res, next) => {
       return res.status(401).json(AUTH_ERROR);
     }
 
-    //서버의 미들웨어에서 자체적으로 req에 커스텀으로 userId라는 키값을 추가해줌
+    //서버의 미들웨어에서 자체적으로!!! req에 커스텀으로 userId라는 키값과 token 키값을 추가해줌
     //다음 미들웨어에서 쉽게 해당 정보를 이용할수있도록 하기위함임
     req.userId = user.id;
+    req.token = token;
     next();
   });
 };

@@ -54,7 +54,8 @@ app.use((error, req, res, next) => {
 
 //3. sequelize 사용시 db connection
 sequelize.sync().then(client => {
-  const server = app.listen(8080);
+  console.log(`Server is Started!!! ${new Date()}`);
+  const server = app.listen(process.env.SERVER_PORT);
   //소켓사용을 위한것
   initSocket(server);
 });
