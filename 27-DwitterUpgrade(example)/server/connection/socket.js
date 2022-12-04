@@ -13,7 +13,10 @@ class Socket {
 
     //socket에서의 Auth를 체크하기위한 로직이다
     this.io.use((socket, next) => {
+      //client와의 handshake
+
       const token = socket.handshake.auth.token;
+      console.log(token, 'token');
       if (!token) {
         return next(new Error('Authentication error'));
       }

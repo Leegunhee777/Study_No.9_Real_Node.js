@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 
 import { initSocket } from './connection/socket.js';
 import { db } from './db/database.js';
+import { sequelize } from './db/databaseSequel.js';
 
 dotenv.config();
 // console.log(process.env);
@@ -30,15 +31,30 @@ app.use((error, req, res, next) => {
   console.error(error);
   res.sendStatus(500);
 });
-//소켓 사용하기 전 원래 코드
-// app.listen(8080);
 
-db.getConnection()
-  .then(connection => {
-    // console.log(connection);
-  })
-  .catch(error => {
-    console.log(error);
-  });
-const server = app.listen(8080);
-initSocket(server);
+//소켓 사용하기 전 원래 코드
+//1.app.listen(8080);
+
+//2.썡 SQL사용시 db connection
+/* 
+  db.getConnection()
+   .then(connection => {
+     // console.log(connection);
+
+     //db connection 후에 서버 open
+     const server = app.listen(8080);
+     //소켓사용을 위한것
+     initSocket(server);
+   })
+   .catch(error => {
+     console.log(error);
+
+   });
+*/
+
+//3. sequelize 사용시 db connection
+sequelize.sync().then(client => {
+  const server = app.listen(8080);
+  //소켓사용을 위한것
+  initSocket(server);
+});
