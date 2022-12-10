@@ -1,8 +1,8 @@
-import * as userRepository from '../data/auth.js';
+import * as userRepository from './auth.js';
 import { db } from '../db/database.js';
 
 //2.sequel 사용
-import { User } from '../data/auth.js';
+import { User } from './auth.js';
 import SQ from 'sequelize';
 import { sequelize } from '../db/databaseSequel.js';
 const DataTypes = SQ.DataTypes;
