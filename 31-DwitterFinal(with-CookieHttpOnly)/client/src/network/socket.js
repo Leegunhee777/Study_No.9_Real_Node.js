@@ -21,7 +21,6 @@ export default class Socket {
     this.io.on(event, messge => callback(messge));
 
     //특정이벤트를 듣고있는 걸 off 해주는 함수를 리턴해준다.off를 통해 특정 이벤트를 듣고있지 않게 off해줄수있음
-    //.off를 통해 특정 이벤트를 듣고있지 않게 off해줄수있음
     return () => this.io.off(event);
   }
 }

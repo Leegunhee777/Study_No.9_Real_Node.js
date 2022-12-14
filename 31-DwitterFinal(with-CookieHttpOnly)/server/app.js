@@ -10,20 +10,26 @@ import dotenv from 'dotenv';
 import { initSocket } from './connection/socket.js';
 import { db } from './db/database.js';
 import { sequelize } from './db/databaseSequel.js';
+import cookieParser from 'cookie-parser';
+import { csrfCheck } from './middleware/csrf.js';
 
 dotenv.config();
 // console.log(process.env);
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
 app.use(
   cors({
     origin: 'http://localhost:3000',
-    credentials: true,
+    credentials: true, //allow the Access-Control-Allow-Credentials
   })
 );
 app.use(morgan('tiny'));
+
+//커스텀 미들웨어
+app.use(csrfCheck);
 
 app.use('/tweets', tweetsRouter);
 app.use('/auth', authRouter);
