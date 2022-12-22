@@ -12,6 +12,7 @@ import { db } from './db/database.js';
 import { sequelize } from './db/databaseSequel.js';
 import cookieParser from 'cookie-parser';
 import { csrfCheck } from './middleware/csrf.js';
+import rateLimit from './middleware/rate-limiter.js';
 
 dotenv.config();
 // console.log(process.env);
@@ -27,6 +28,8 @@ app.use(
   })
 );
 app.use(morgan('tiny'));
+
+app.use(rateLimit);
 
 //커스텀 미들웨어
 app.use(csrfCheck);
